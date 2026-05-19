@@ -1,0 +1,28 @@
+services:
+  # Database Utama (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ar_platform
+      MYSQL_ROOT_PASSWORD: 123 # Pastikan sama dengan DB_PASSWORD di .env
+      MYSQL_ALLOW_EMPTY_PASSWORD: "false"  # Hanya untuk pengembangan, jangan gunakan di produksi
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Redis (Untuk Cache/Queue jika nanti ingin pindah dari database ke redis)
+  # redis:
+  #   image: redis:alpine
+  #   container_name: scanyuk_redis
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+
+volumes:
+  db_data:
+  # redis_data:
